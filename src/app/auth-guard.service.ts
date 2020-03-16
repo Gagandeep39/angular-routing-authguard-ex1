@@ -10,7 +10,7 @@ import {
 import { Observable } from "rxjs";
 
 @Injectable()
-export class AuthGuard implements CanActivate{
+export class AuthGuard implements CanActivate, CanActivateChild{
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
@@ -22,5 +22,9 @@ export class AuthGuard implements CanActivate{
       if (authenticated) return true;
       else this.router.navigate(["/"]);
     });
+  }
+
+  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
+    return this.canActivate(childRoute, state)
   }
 }

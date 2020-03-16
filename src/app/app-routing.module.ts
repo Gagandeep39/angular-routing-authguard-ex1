@@ -9,29 +9,33 @@ import { EditServerComponent } from "./servers/edit-server/edit-server.component
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { AuthGuard } from "./auth-guard.service";
 
-
-const appRoutes : Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'users', component: UsersComponent, children: [
-      { path: ':id/:name', component: UserComponent },  // 2 parameter
-    ] },
-    // // { path: 'users/:id', component: UserComponent }, // 1 parameter
-    // { path: 'users/:id/:name', component: UserComponent },  // 2 parameter
-    { path: 'servers', canActivate: [AuthGuard], component: ServersComponent, children: [
-      { path: ':id', component: ServerComponent },
-      { path: ':id/edit', component: EditServerComponent },
-    ] },
-    {path: '**', component: PageNotFoundComponent}  // '**' implies all paths
-  ];  //Parsed from top to bottom
-  
+const appRoutes: Routes = [
+  { path: "", component: HomeComponent },
+  {
+    path: "users",
+    component: UsersComponent,
+    children: [
+      { path: ":id/:name", component: UserComponent } // 2 parameter
+    ]
+  },
+  // // { path: 'users/:id', component: UserComponent }, // 1 parameter
+  // { path: 'users/:id/:name', component: UserComponent },  // 2 parameter
+  {
+    path: "servers",
+    // canActivate: [AuthGuard], // Will add AuthGuard to Parent 
+    canActivateChild: [AuthGuard],  // will add auth guard to childs
+    component: ServersComponent,
+    children: [
+      { path: ":id", component: ServerComponent },
+      { path: ":id/edit", component: EditServerComponent }
+    ]
+  },
+  { path: "**", component: PageNotFoundComponent } // '**' implies all paths
+]; //Parsed from top to bottom
 
 @NgModule({
-    imports: [
-        RouterModule.forRoot(appRoutes)
-    ],
-    // When we use this module in another module, exports tell what  exactly from this module is accessible to the module that imports this module 
-    exports: [
-        RouterModule
-    ]
+  imports: [RouterModule.forRoot(appRoutes)],
+  // When we use this module in another module, exports tell what  exactly from this module is accessible to the module that imports this module
+  exports: [RouterModule]
 })
-export class AppRoutingModule{}
+export class AppRoutingModule {}
