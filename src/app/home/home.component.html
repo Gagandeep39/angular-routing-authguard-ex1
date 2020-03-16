@@ -2,3 +2,11 @@
 <p>Manage your Servers and Users.</p>
 <button (click)="loadServers()" class="btn btn-primary">Load Servers</button>
 <button (click)="loadServersWithParamsQuery(1)" class="btn btn-primary">Load Servers with Query</button>
+
+<div>
+    <button (click)="logIn()" class="btn btn-success">Log In</button>
+    <button (click)="logOut()" class="btn btn-danger">Log Out</button>
+</div>
+<div>
+    Login Status: {{ status }}
+</div>
