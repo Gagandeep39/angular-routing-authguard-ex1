@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ServersService } from '../servers.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-server',
@@ -20,7 +20,13 @@ export class ServerComponent implements OnInit {
     // Servers component has a <app-server> which takes no param 
     // if(currentId==null)
     //   currentId = 1;
+
     this.server = this.serversService.getServer(currentId);
+    this.route.params.subscribe((params: Params)=>{
+      currentId = params['id'];
+      this.server = this.serversService.getServer(currentId);
+    })
+
   }
 
 }
