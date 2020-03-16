@@ -28,6 +28,7 @@ const appRoutes : Routes = [
     imports: [
         RouterModule.forRoot(appRoutes)
     ],
+    // When we use this module in another module, exports tell what  exactly from this module is accessible to the module that imports this module 
     exports: [
         RouterModule
     ]
