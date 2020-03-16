@@ -4,8 +4,10 @@
       <ul class="nav nav-tabs">
         <li class="nav-item" role="presentation" class="active"><a class="nav-link" [routerLink]="['/']"
             routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
-        <li class="nav-item" role="presentation"><a class="nav-link" [routerLink]="['/servers']"
+            <!-- No property binding (static), reelative path  -->
+        <li class="nav-item" role="presentation"><a class="nav-link" routerLink='servers'
             routerLinkActive="active">Servers</a></li>
+            <!-- Using property binding, absolute path  -->
         <li class="nav-item" role="presentation"><a class="nav-link" [routerLink]="['/users']"
             routerLinkActive="active">Users</a></li>
       </ul>
