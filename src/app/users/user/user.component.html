@@ -1,2 +1,20 @@
 <p>User with ID {{user.id}} loaded.</p>
 <p>User name is {{user.name}}</p>
+
+<hr>
+
+<button class="btn btn-primary" (click)="reloadData()">Gagan (12)</button>
+
+<p>
+    Above button will change URL path but wont update data
+    This is the dfault behaviour of Angar
+    If a route is called frm same route, the contents wont be rerendered
+</p>
+<p>
+    To fix this issue, we use 'route.params' which is a part of Observable. 
+    We subscribe to params object
+</p>
+<p>
+    We can still use activatedParams without subscription if we are sure that there is only one 
+    way to reach the path and that is from another path
+</p>
