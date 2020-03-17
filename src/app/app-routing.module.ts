@@ -10,6 +10,7 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 import { AuthGuard } from "./auth-guard.service";
 import { CanDeactivateGuard } from "./servers/edit-server/can-deactivate-guard.service";
 import { ErrorPageComponent } from "./error-page/error-page.component";
+import { ServerResolverService } from "./server-resolver.service";
 
 const appRoutes: Routes = [
   { path: "", component: HomeComponent },
@@ -28,7 +29,7 @@ const appRoutes: Routes = [
     canActivateChild: [AuthGuard],  // will add auth guard to childs
     component: ServersComponent,
     children: [
-      { path: ":id", component: ServerComponent },
+      { path: ":id", component: ServerComponent, resolve: {server: ServerResolverService} },  
       { path: ":id/edit", component: EditServerComponent, canDeactivate: [CanDeactivateGuard] }
     ]
   },
@@ -37,7 +38,8 @@ const appRoutes: Routes = [
 ]; //Parsed from top to bottom
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [RouterModule.forRoot(appRoutes, {useHash: true})],
+  // imports: [RouterModule.forRoot(appRoutes)],
   // When we use this module in another module, exports tell what  exactly from this module is accessible to the module that imports this module
   exports: [RouterModule]
 })

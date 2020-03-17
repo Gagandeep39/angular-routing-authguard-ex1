@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
 import { ServersService } from "../servers.service";
-import { ActivatedRoute, Params, Router } from "@angular/router";
+import { ActivatedRoute, Params, Router, Data } from "@angular/router";
 import {
   CanDeactivateGuard,
   CanComponentDeactivate
@@ -26,17 +26,23 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
   ) {}
 
   ngOnInit() {
-    let serverId: number;
-    this.route.params.subscribe((params: Params) => {
-      serverId = params["id"];
-    });
-    this.route.queryParams.subscribe((params: Params) => {
-      this.allowEdit = params["allowEdit"] == "1" ? true : false;
-    });
+    // let serverId: number;
+    // this.route.params.subscribe((params: Params) => {
+    //   serverId = params["id"];
+    // });
+    // this.route.queryParams.subscribe((params: Params) => {
+    //   this.allowEdit = params["allowEdit"] == "1" ? true : false;
+    // });
 
-    this.server = this.serversService.getServer(serverId);
-    this.serverName = this.server.name;
-    this.serverStatus = this.server.status;
+    // this.server = this.serversService.getServer(serverId);
+    // this.serverName = this.server.name;
+    // this.serverStatus = this.server.status;
+
+    //Server is now fetched using resolver 
+    this.route.data.subscribe((data: Data)=>{
+      this.server = data['server'];
+    })
+
 
     console.log("allowEdit: " + this.route.snapshot.queryParams["allowEdit"]);
     console.log("Fragment: " + this.route.snapshot.fragment);
