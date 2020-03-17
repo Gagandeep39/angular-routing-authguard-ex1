@@ -9,6 +9,7 @@ import { EditServerComponent } from "./servers/edit-server/edit-server.component
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { AuthGuard } from "./auth-guard.service";
 import { CanDeactivateGuard } from "./servers/edit-server/can-deactivate-guard.service";
+import { ErrorPageComponent } from "./error-page/error-page.component";
 
 const appRoutes: Routes = [
   { path: "", component: HomeComponent },
@@ -31,6 +32,7 @@ const appRoutes: Routes = [
       { path: ":id/edit", component: EditServerComponent, canDeactivate: [CanDeactivateGuard] }
     ]
   },
+  { path: 'error-page', component: ErrorPageComponent, data: {message: 'Error Page'} }, //In data we can pass any key value pairs
   { path: "**", component: PageNotFoundComponent } // '**' implies all paths
 ]; //Parsed from top to bottom
 
